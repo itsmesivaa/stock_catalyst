@@ -2,6 +2,9 @@
 `StockCatalyst web application designed to empower you, the modern investor, with the time-tested stock trading methodology used by market wizards like Stan Weinstein, Mark Minervini, and William O'Neil.  These legendary figures have built their success on proven strategies, and now, StockCatalyst puts that same power in your hands.Imagine automating tedious stock analysis, freeing yourself to focus on making informed investment decisions.  StockCatalyst does the heavy lifting, leveraging these market-proven strategies to identify high-growth potential stocks with serious upside.  No longer do you need to spend countless hours sifting through data – StockCatalyst streamlines the process, allowing you to focus on what matters most: building your wealth.`
 
 `This app goes beyond basic stock analysis.  By incorporating the wisdom of market wizards, StockCatalyst equips you with a powerful edge.  Gain insights you might have missed, discover hidden gems with explosive potential, and make smarter investment decisions – all with the help of StockCatalyst.`
+
+https://github.com/itsmesivaa/stock_catalyst/assets/54579777/5a24ce99-9c0a-4678-a9d3-3d16b6114051
+
 # Key Contributions:
 
   * Developed a robust web scraping tool leveraging Python to extract real-time stock prices from Yahoo Finance and fundamental evaluation metrics from MarketSmith websites.
