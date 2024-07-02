@@ -1,0 +1,55 @@
+#Local Docker File
+FROM python:3.11.5-slim
+
+# Set working directory to /app
+WORKDIR /app
+
+# Install system dependencies and the ODBC Driver 17 for SQL Server
+RUN apt-get update && apt-get install -y \
+    unixodbc-dev \
+    python3-dev \
+    gcc \
+    g++ \
+    curl \
+    gnupg \
+    iputils-ping \
+    telnet \
+    cron \
+    supervisor \    
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update \
+    && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Firefox
+RUN apt-get update && apt-get install -y \
+    firefox-esr \
+    && rm -rf /var/lib/apt/lists/*    
+
+# Set the timezone to IST
+ENV TZ=Asia/Kolkata
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
+# Copy application files
+COPY yahoofinance_daily_price_load.py .
+COPY marketsmith.py .
+COPY stanweinstein_markminervini.py .
+COPY db_conn.py .
+COPY db_config.ini .
+COPY app.py .
+COPY BookCover.png .
+COPY Equity.xlsx .
+COPY Equity-New.xlsx .
+COPY scheduler.py .
+COPY NSEBhavcopy.sqlite .
+COPY StockCatalyst_workflow.mp4 .
+COPY README.md .
+
+#Running the Scheduler to kickstart the defined data load process
+CMD ["python","scheduler.py"]

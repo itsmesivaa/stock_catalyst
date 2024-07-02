@@ -1,0 +1,41 @@
+FROM python:3.11.5-slim
+
+# Set working directory to /app
+WORKDIR /app/StreamlitUI
+
+# Install system dependencies and the ODBC Driver 17 for SQL Server
+RUN apt-get update && apt-get install -y \
+    unixodbc-dev \
+    python3-dev \
+    gcc \
+    g++ \
+    curl \
+    gnupg \
+    iputils-ping \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update \
+    && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
+# Copy application files
+COPY db_conn.py .
+COPY db_config.ini .
+COPY app.py .
+COPY BookCover.png .
+COPY StockCatalyst_workflow.mp4 .
+COPY README.md .
+COPY NSEBhavcopy.sqlite .
+
+
+# Expose the port for Streamlit
+EXPOSE 8501
+
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

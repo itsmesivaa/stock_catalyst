@@ -1,0 +1,15 @@
+beautifulsoup4==4.12.3
+httpx==0.27.0
+numpy==1.25.2
+pandas==2.0.3
+plotly==5.18.0
+Requests==2.32.3
+selenium==4.21.0
+SQLAlchemy==2.0.25
+streamlit==1.35.0
+tqdm==4.66.1
+configparser==7.0.0
+openpyxl
+pyodbc
+connectorx
+schedule
